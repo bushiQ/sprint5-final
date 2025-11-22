@@ -12,7 +12,6 @@ import (
 )
 
 type Training struct {
-	// TODO: добавить поля
 	Steps        int
 	TrainingType string
 	Duration     time.Duration
@@ -20,14 +19,13 @@ type Training struct {
 }
 
 func (t *Training) Parse(datastring string) (err error) {
-	// TODO: реализовать функцию
 	parts := strings.Split(datastring, ",")
 	if len(parts) != 3 {
 		return errors.New("splitting error")
 	}
 	steps, err := strconv.Atoi(parts[0])
 	if err != nil {
-		return err
+		return fmt.Errorf("steps ivalid format: %w", err)
 	}
 	if steps <= 0 {
 		return errors.New("incorrect steps")
@@ -35,7 +33,7 @@ func (t *Training) Parse(datastring string) (err error) {
 	t.Steps = steps
 	parsedTime, err := time.ParseDuration(parts[2])
 	if err != nil {
-		return err
+		return fmt.Errorf("time parsing error: %w", err)
 	}
 	if parsedTime <= 0 {
 		return errors.New("incorrect time")
@@ -46,7 +44,6 @@ func (t *Training) Parse(datastring string) (err error) {
 }
 
 func (t Training) ActionInfo() (string, error) {
-	// TODO: реализовать функцию
 	if t.Steps <= 0 {
 		return "", errors.New("incorrect steps")
 	}

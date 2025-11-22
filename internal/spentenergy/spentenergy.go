@@ -14,7 +14,6 @@ const (
 )
 
 func WalkingSpentCalories(steps int, weight, height float64, duration time.Duration) (float64, error) {
-	// TODO: реализовать функцию
 	switch {
 	case steps <= 0:
 		return 0, errors.New("steps must be above zero")
@@ -32,7 +31,6 @@ func WalkingSpentCalories(steps int, weight, height float64, duration time.Durat
 }
 
 func RunningSpentCalories(steps int, weight, height float64, duration time.Duration) (float64, error) {
-	// TODO: реализовать функцию
 	switch {
 	case steps <= 0:
 		return 0, errors.New("steps must be above zero")
@@ -50,7 +48,6 @@ func RunningSpentCalories(steps int, weight, height float64, duration time.Durat
 }
 
 func MeanSpeed(steps int, height float64, duration time.Duration) float64 {
-	// TODO: реализовать функцию
 	if duration <= 0 {
 		return 0
 	}
@@ -62,7 +59,6 @@ func MeanSpeed(steps int, height float64, duration time.Duration) float64 {
 }
 
 func Distance(steps int, height float64) float64 {
-	// TODO: реализовать функцию
 	stepLength := height * stepLengthCoefficient
 	distanceM := stepLength * float64(steps)
 	return distanceM / mInKm

@@ -12,32 +12,30 @@ import (
 )
 
 type DaySteps struct {
-	// TODO: добавить поля
 	Steps    int
 	Duration time.Duration
 	personaldata.Personal
 }
 
 func (ds *DaySteps) Parse(datastring string) (err error) {
-	// TODO: реализовать функцию
 	parts := strings.Split(datastring, ",")
 	if len(parts) != 2 {
 		return errors.New("string parsing error")
 	}
 	steps, err := strconv.Atoi(parts[0])
 	if err != nil {
-		return err
+		return fmt.Errorf("conversion error: %w", err)
 	}
 	if steps <= 0 {
-		return errors.New("incorrect stepcount")
+		return errors.New("invalid steps count")
 	}
 	ds.Steps = steps
 	time, err := time.ParseDuration(parts[1])
 	if err != nil {
-		return err
+		return fmt.Errorf("time parsing error: %w", err)
 	}
 	if time <= 0 {
-		return errors.New("incorrect time")
+		return errors.New("invalid time")
 	}
 	ds.Duration = time
 	return nil
@@ -45,7 +43,6 @@ func (ds *DaySteps) Parse(datastring string) (err error) {
 }
 
 func (ds DaySteps) ActionInfo() (string, error) {
-	// TODO: реализовать функцию\
 	dist := spentenergy.Distance(ds.Steps, ds.Height)
 	spentCals, err := spentenergy.WalkingSpentCalories(ds.Steps, ds.Weight, ds.Height, ds.Duration)
 	if err != nil {
